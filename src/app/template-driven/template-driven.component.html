@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <form (ngSubmit)="onSubmit()" #loginform="ngForm">
+            <div class="form-group" ngModelGroup="username">
+                <label [ngStyle]="{'color': firstname.invalid && firstname.touched ? 'red' : 'black'}" class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="firstname" ngModel required #firstname="ngModel">
+                    <span *ngIf="firstname.invalid && firstname.touched">First Name is required</span>
+                </div>
+                <label [ngStyle]="{'color': lastname.invalid && lastname.touched ? 'red' : 'black'}" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="lastname" ngModel required #lastname="ngModel">
+                    <span *ngIf="lastname.invalid && lastname.touched">Last Name is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label [ngStyle]="{'color': emailVal.invalid && emailVal.touched ? 'red' : 'black'}" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="email" ngModel required email #emailVal="ngModel">
+                    <span *ngIf="emailVal.invalid && emailVal.touched">Email is required</span>
+                </div>
+            </div>
+            <div class="mt-2 form-group">
+                <label>Select 
+                  <select class="mt-2 form-control" name="dropdown" [ngModel]="defaultSelect">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5">Five</option>
+                  </select>
+                </label>
+            </div>
+            <button type="button" class="mt-4 btn btn-outline-primary btn-spacing btn-sm" (click)="onClickDefault()">Set Default</button>
+            <button type="submit" class="mt-4 btn btn-primary btn-sm">Submit</button>
+        </form>
+    </div>
+</div>

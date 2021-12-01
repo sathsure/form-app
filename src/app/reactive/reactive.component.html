@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <!-- <form (ngSubmit)="onSubmit()" #loginform="ngForm"> -->
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginform">
+            <!-- <div class="form-group" ngModelGroup="username"> -->
+            <div class="form-group" formGroupName="username">
+                <label [ngStyle]="{'color': loginform.get('username.firstname').invalid && loginform.get('username.firstname').touched ? 'red' : 'black'}" class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-4">
+                    <!-- <input type="text" class="form-control" name="firstname" ngModel required #firstname="ngModel">
+                    <span *ngIf="firstname.invalid && firstname.touched">First Name is required</span> -->
+                    <input type="text" class="form-control" name="firstname" required formControlName="firstname">
+                    <span *ngIf="loginform.get('username.firstname').invalid && loginform.get('username.firstname').touched">First Name is required</span>
+                </div>
+                <label [ngStyle]="{'color': loginform.get('username.lastname').invalid && loginform.get('username.lastname').touched ? 'red' : 'black'}" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-4">
+                    <!-- <input type="text" class="form-control" name="lastname" ngModel required #lastname="ngModel">
+                    <span *ngIf="lastname.invalid && lastname.touched">Last Name is required</span> -->
+                    <input type="text" class="form-control" name="lastname" required formControlName="lastname">
+                    <span *ngIf="loginform.get('username.lastname').invalid && loginform.get('username.lastname').touched">Last Name is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label [ngStyle]="{'color': loginform.get('emailVal').invalid && loginform.get('emailVal').touched ? 'red' : 'black'}" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-4">
+                    <!-- <input type="text" class="form-control" name="email" ngModel required email #emailVal="ngModel">
+                    <span *ngIf="emailVal.invalid && emailVal.touched">Email is required</span> -->
+                    <input type="text" class="form-control" name="emailVal" required email formControlName="emailVal">
+                    <span *ngIf="loginform.get('emailVal').invalid && loginform.get('emailVal').touched">Email is required</span>
+                </div>
+            </div>
+            <div class="mt-2 form-group">
+                <label>Select 
+                  <!-- <select class="mt-2 form-control" name="dropdown" [ngModel]="defaultSelect"> -->
+                    <select class="mt-2 form-control" name="dropdown" formControlName="dropdown">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5">Five</option>
+                  </select>
+                </label>
+            </div>
+            <div *ngIf="loginform.get('address')?.length" formArrayName="address">
+                <div class="form-group" *ngFor="let addressControl of loginform.get('address').controls;let i = index">
+                    <label class="col-sm-2 col-form-label">Address {{i+1}}</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="{{addressControl + i}}" [formControlName]="i">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="mt-4 btn btn-outline-primary btn-spacing btn-sm" (click)="onAddNew()">Add</button>
+            <button type="button" class="mt-4 btn btn-outline-primary btn-spacing btn-sm" (click)="onClickDefault()">Set Default</button>
+            <button type="submit" class="mt-4 btn btn-primary btn-sm">Submit</button>
+        </form>
+    </div>
+</div>
